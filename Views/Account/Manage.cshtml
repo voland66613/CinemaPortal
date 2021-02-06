@@ -1,0 +1,22 @@
+﻿@model CinemaPortal_ASP.NET_Core.ViewModels.ManageAccountViewModel
+@{
+    ViewBag.Title = "Control";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Change account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Имя:</dt>
+        <dd>@Model.UserName [@Html.ActionLink("Change name", "ChangeUserName")]</dd>
+        <dt>Email:</dt>
+        <dd>@Model.Email [@Html.ActionLink("Change email", "ChangeEmail")]</dd>
+        
+        <dt>Пароль:</dt>
+        <dd>[@Html.ActionLink("Change password", "ChangePassword")]
+        </dd>
+    </dl>
+</div>

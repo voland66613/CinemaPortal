@@ -1,0 +1,73 @@
+﻿@model CinemaPortal_ASP.NET_Core.ViewModels.DetailsViewModel;
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="media">
+
+                    @if (Model.Cinema.Poster != null)
+                    {
+                        <div>
+                            <img class="img-responsive" style="max-height:450px;max-width:350px" src="@Url.Action("GetImage", "Cinema", new { name = Model.Cinema.Name })" />
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="jumbotron my-jumbotron">
+                    <h2>"@Model.Cinema.Name"</h2>
+                    <div>
+                        <span class="display-label">
+                            <b>@Html.DisplayNameFor(model => model.Cinema.FilmMaker)</b>
+                        </span>
+                        <span class="display-field">
+                            @Html.DisplayFor(model => model.Cinema.FilmMaker)
+                        </span>
+                    </div>
+                    <div>
+                        <span class="display-label">
+                            <b>@Html.DisplayNameFor(model => model.Cinema.Year)</b>
+                        </span>
+                        <span class="display-field">
+                            @Html.DisplayFor(model => model.Cinema.Year)
+                        </span>
+
+                    </div>
+
+                    <hr />
+                    <div>
+                        <span class="display-label">
+                            <b>@Html.DisplayNameFor(model => model.Cinema.Description)</b>
+                        </span>
+                        <span class="display-field">
+                            @Html.DisplayFor(model => model.Cinema.Description)
+                        </span>
+                    </div>
+                    <hr />
+                    <p class="bottom-left" style="font-size:10pt"><i>Posted by @Model.Cinema.UserName</i></p>
+
+                    @if (User.Identity.IsAuthenticated && Model.Cinema.UserName.Trim().ToUpper().Equals(User.Identity.Name.Trim().ToUpper()))
+                    {
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @Html.ActionLink("Edit", "Edit", "Cinema", routeValues: new { name = Model.Cinema.Name, listName=Model.ListName }, htmlAttributes: new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Delete", "Delete", "Cinema", routeValues: new { id = Model.Cinema.CinemaID, listName=Model.ListName }, htmlAttributes: new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        @if (Model.ListName == "AllCinema")
+        {
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary">К содержанию</a>
+        }
+        else
+        {
+            <a asp-controller="Cinema" asp-action="MyCinema" class="btn btn-primary">К содержанию</a>
+        }
+    </div>
+
+
+
